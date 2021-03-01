@@ -4,16 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Visualización de datos</title>
+  <title>datos</title>
 </head>
 
 <body>
   <canvas id="chart" width="800" height="400"></canvas>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
   <script type="module">
-    //import data from './data.js'
-    import { getTotalCasesByDate } from './utils.js'
-    function totalCasesChart(data, ctx) {
+
+    import data from './data.js'
+
+    function totalCasesChart(ctx) {
       const {
         confirmed,
         deaths,
@@ -23,6 +24,7 @@
         type: 'line',
         data: {
           labels: confirmed.map(item => new Intl.DateTimeFormat('es-MX', { month: 'long', day: 'numeric' }).format(new Date(item.date))),
+          //Intl.DateTimeFormat('es-MX', { month: 'long', day: 'numeric' }).format(new Date(item.date))
           datasets: [
             {
               label: 'Muertes',
@@ -51,7 +53,7 @@
           },
           title: {
             display: true,
-            text: 'Todos los casos desde el primer reporte COVID-19',
+            text: ' casos COVID-19',
             fontSize: 30,
             padding: 30,
             fontColor: '#12619c',
@@ -96,14 +98,13 @@
       })
     }
 
-    async function renderCharts() {
+     function renderCharts() {
       const ctx = document.querySelector('#chart').getContext('2d')
-      const data = await getTotalCasesByDate()
-      totalCasesChart(data, ctx)
+      //const data = await getTotalCasesByDate()
+      totalCasesChart(ctx)
     }
     renderCharts()
   </script>
 </body>
 
 </html>
-// https://www.youtube.com/watch?v=Tc2YJRJ7fPo
