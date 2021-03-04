@@ -1,19 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>datos</title>
+  <title>GRÁFICO</title>
 </head>
-
 <body>
-  <canvas id="chart" width="800" height="400"></canvas>
+  <canvas id="chart" width="5" height="2"></canvas>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
   <script type="module">
-
     import data from './data.js'
-
     function totalCasesChart(ctx) {
       const {
         confirmed,
@@ -24,11 +20,10 @@
         type: 'line',
         data: {
           labels: confirmed.map(item => new Intl.DateTimeFormat('es-MX', { month: 'long', day: 'numeric' }).format(new Date(item.date))),
-          //Intl.DateTimeFormat('es-MX', { month: 'long', day: 'numeric' }).format(new Date(item.date))
           datasets: [
             {
               label: 'Muertes',
-              borderColor: 'red',
+              borderColor: 'black',
               data: deaths.map(item => item.cases),
             },
             {
@@ -38,12 +33,13 @@
             },
             {
               label: 'Confirmados',
-              borderColor: 'orange',
+              borderColor: 'red',
               data: confirmed.map(item => item.cases),
             }
           ]
         },
         options: {
+          responsive:true,
           scales: {
             xAxes: [{
               gridLines: {
@@ -53,7 +49,7 @@
           },
           title: {
             display: true,
-            text: ' casos COVID-19',
+            text: ' ESTADÍSTICA COVID-19',
             fontSize: 30,
             padding: 30,
             fontColor: '#12619c',
@@ -62,7 +58,7 @@
             position: 'bottom',
             labels: {
               padding: 20,
-              boxWidth: 15,
+              boxWidth: 10,
               fontFamily: 'system-ui',
               fontColor: 'black',
             }
@@ -73,7 +69,7 @@
             }
           },
           tooltips: {
-            backgroundColor: '#0584f6',
+            backgroundColor: '#0984f4',
             titleFontSize: 20,
             xPadding: 20,
             yPadding: 20,
@@ -83,15 +79,15 @@
           },
           elements: {
             line: {
-              borderWidth: 8,
+              borderWidth: 5,
               fill: false,
             },
             point: {
-              radius: 6,
-              borderWidth: 4,
+              radius: 3,
+              borderWidth: 3,
               backgroundColor: 'white',
-              hoverRadius: 8,
-              hoverBorderWidth: 4,
+              hoverRadius: 5,
+              hoverBorderWidth: 3,
             }
           }
         }
@@ -106,5 +102,4 @@
     renderCharts()
   </script>
 </body>
-
 </html>
